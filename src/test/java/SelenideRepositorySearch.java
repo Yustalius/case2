@@ -38,7 +38,7 @@ public class SelenideRepositorySearch {
         $(".AppHeader-user").click();
         //Нажать Sign out
         $x("//span[text()='Sign out']").click();
-        //Повторно нажать Sign out
+        //Повторно нажать Sign out жопа
         $(".inline-form").click();
 
 
