@@ -32,13 +32,13 @@ public class SelenideRepositorySearch {
         $(".position-relative").shouldHave(text("selenide / selenide"));
         //Подвести мышку к первому аватару из блока contributors
         $(".BorderGrid").$(byText("Contributors")).ancestor(".BorderGrid-row").$$("ul li").first().hover();
-        //
+        //Проверить надпись "Andrei Solntsev"
         $(".Truncate-text--expandable").shouldHave(text("Andrei Solntsev"));
-        //
+        //Нажать в правом верхнем углу на крайнюю иконку
         $(".AppHeader-user").click();
-        //
+        //Нажать Sign out
         $x("//span[text()='Sign out']").click();
-        //
+        //Повторно нажать Sign out
         $(".inline-form").click();
 
 
