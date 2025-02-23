@@ -1,3 +1,5 @@
+package my_progect;
+
 import com.codeborne.selenide.Configuration;
 import org.junit.jupiter.api.Test;
 
@@ -19,9 +21,9 @@ public class SelenideRepositorySearch {
         //Ввести почту для входа
         $("#login_field").setValue("awerinzh@yandex.ru");
         //Ввести пароль для входа
-        $("#password").setValue("averin228337");
+        $("#password").setValue("averin228337").pressEnter();
         //Нажать на Sign in
-        $("[value='Sign in']").click();
+        //$("[value='Sign in']").click();
         //Нажать на поле ввода
         $(".placeholder").click();
         //Ввести в поиск "selenide" и нажать Enter
