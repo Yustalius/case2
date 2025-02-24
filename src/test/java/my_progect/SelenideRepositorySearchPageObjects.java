@@ -18,8 +18,8 @@ public class SelenideRepositorySearchPageObjects {
 
         repositoryPage.openPage()
                 .clickButtonSignIn()
-                .setLogin("awerinzh@yandex.ru")
-                .setPassword("averin228337")
+                .setLogin("Yustalius")
+                .setPassword("F215368479u")
                 .clickTheInputField()
                 .enterInTheField("selenide")
                 .clickOnTheFirstLink()
