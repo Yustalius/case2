@@ -4,6 +4,7 @@ import com.codeborne.selenide.Configuration;
 import org.junit.jupiter.api.Test;
 
 import static com.codeborne.selenide.Condition.text;
+import static com.codeborne.selenide.Selectors.byTagAndText;
 import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selenide.*;
 
@@ -22,8 +23,6 @@ public class SelenideRepositorySearch {
         $("#login_field").setValue("awerinzh@yandex.ru");
         //Ввести пароль для входа
         $("#password").setValue("averin228337").pressEnter();
-        //Нажать на Sign in
-        //$("[value='Sign in']").click();
         //Нажать на поле ввода
         $(".placeholder").click();
         //Ввести в поиск "selenide" и нажать Enter
@@ -39,7 +38,7 @@ public class SelenideRepositorySearch {
         //Нажать в правом верхнем углу на крайнюю иконку
         $(".AppHeader-user").click();
         //Нажать Sign out
-        $x("//span[text()='Sign out']").click();
+        $(byTagAndText("span", "Sign out")).click();
         //Повторно нажать Sign out получилось
         $(".inline-form").click();
 
