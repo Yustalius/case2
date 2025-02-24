@@ -1,5 +1,7 @@
 package pages;
 
+import com.codeborne.selenide.SelenideElement;
+
 import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Selectors.byTagAndText;
 import static com.codeborne.selenide.Selectors.byText;
@@ -7,62 +9,91 @@ import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.open;
 
 public class RepositoryPage {
+    private SelenideElement
+            setLoginInInput = $("#login_field"),
+            setPasswordInput = $("#password");
 
-    public void openPage() {
+    public RepositoryPage openPage() {
         open("https://github.com/");
+
+        return this;
     }
 
-    public void ClickButtonSignIn() {
+    public RepositoryPage clickButtonSignIn() {
         $(".HeaderMenu-link-wrap").click();
+
+        return this;
     }
 
-   public void setLogin(String value) {
-       $("#login_field").setValue(value);
+   public RepositoryPage setLogin(String value) {
+       setLoginInInput.setValue(value);
+
+       return this;
    }
 
-    public void setPassword(String value) {
-        $("#password").setValue(value).pressEnter();
+    public RepositoryPage setPassword(String value) {
+        setPasswordInput.setValue(value).pressEnter();
+
+        return this;
     }
 
-    public void ClickTheInputField() {
+    public RepositoryPage clickTheInputField() {
         $(".placeholder").click();
+
+        return this;
     }
 
-    public void EnterInTheField(String value) {
+    public RepositoryPage enterInTheField(String value) {
         $("#query-builder-test").setValue(value).pressEnter();
+
+        return this;
     }
 
-    public void ClickOnTheFirstLink() {
+    public RepositoryPage clickOnTheFirstLink() {
         $(".search-title").click();
+
+        return this;
     }
 
-    public void setShouldHave(String value) {
+    public RepositoryPage setShouldHave(String value) {
         $(".position-relative").shouldHave(text(value));
+
+        return this;
     }
 
-    public void HoverOverFirstContributor() {
+    public RepositoryPage hoverOverFirstContributor() {
         $(".BorderGrid")
                 .$(byText("Contributors")).ancestor(".BorderGrid-row")
                 .$$("ul li").first().hover();
 
+        return this;
+
     }
 
-    public void VerifyContributorName(String value) {
+    public RepositoryPage verifyContributorName(String value) {
         $(".Truncate-text--expandable").shouldHave(text(value));
 
+        return this;
+
     }
 
-    public void ClickOnTheIcon() {
+    public RepositoryPage clickOnTheIcon() {
         $(".AppHeader-user").click();
+
+        return this;
     }
 
 
-    public void ClickSignOut() {
+    public RepositoryPage clickSignOut() {
         $(byTagAndText("span", "Sign out")).click();
+
+        return this;
     }
 
-    public void ClickSignOutAgain() {
+    public RepositoryPage clickSignOutAgain() {
         $(".inline-form").click();
+
+        return this;
     }
 
 
