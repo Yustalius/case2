@@ -14,20 +14,23 @@ public class TestBase {
     protected MainPage mainPage = new MainPage();
 
     @BeforeAll
-    void setUP() {
+     static void setUP() {
         Configuration.holdBrowserOpen = true;
     }
 
     @BeforeEach
     void registerNewUser() {
+
+        String password = faker.internet().password();
+
         Selenide.open(MAIN_PAGE_URL, MainPage.class)
                 .clickRegisterButton()
                 .clickMaleGender()
                 .setFirstName(faker.name().firstName())
                 .setLastName(faker.name().lastName())
                 .setEmail(faker.internet().emailAddress())
-                .setPassword(faker.internet().password())
-                .setConfirmPassword(faker.internet().password())
+                .setPassword(password)
+                .setConfirmPassword(password)
                 .clickRegisterButton()
                 .verifyRegistrationSuccessMessage()
                 .clickContinueButton()
