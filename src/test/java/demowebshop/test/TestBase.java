@@ -33,8 +33,7 @@ public class TestBase {
                 .setConfirmPassword(password)
                 .clickRegisterButton()
                 .verifyRegistrationSuccessMessage()
-                .clickContinueButton()
-                .clickOnProduct("Apparel & Shoes");
+                .clickContinueButton();
     }
 
     @AfterEach
