@@ -1,46 +1,42 @@
 package demowebshop.test;
 
 import com.codeborne.selenide.Configuration;
+import com.codeborne.selenide.Selenide;
 import com.github.javafaker.Faker;
-import demowebshop.pages.LogoutPage;
-import demowebshop.pages.RegistrationPage;
-import demowebshop.pages.SuccessPage;
-import demowebshop.pages.WelcomePage;
+import demowebshop.pages.MainPage;
 import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 
 public class TestBase {
-
+    private static final String MAIN_PAGE_URL = "https://demowebshop.tricentis.com/";
     protected final Faker faker = new Faker();
+    protected MainPage mainPage = new MainPage();
+
+    @BeforeAll
+    void setUP() {
+        Configuration.holdBrowserOpen = true;
+    }
 
     @BeforeEach
     void registerNewUser() {
-        String firstName = faker.name().firstName();
-        String lastName = faker.name().lastName();
-        String email = faker.internet().emailAddress();
-        String password = faker.internet().password();
-
-        Configuration.holdBrowserOpen = true;
-
-        WelcomePage
-                .openPage()
-                .clickRegisterButton();
-        RegistrationPage
+        Selenide.open(MAIN_PAGE_URL, MainPage.class)
+                .clickRegisterButton()
                 .clickMaleGender()
-                .setFirstName(firstName)
-                .setLastName(lastName)
-                .setEmail(email)
-                .setPassword(password)
-                .setConfirmPassword(password)
-                .clickRegisters();
-        SuccessPage
-                .verifyRegistrationSuccessMessage(" Your registration completed ")
-                .clickContinueButton();
+                .setFirstName(faker.name().firstName())
+                .setLastName(faker.name().lastName())
+                .setEmail(faker.internet().emailAddress())
+                .setPassword(faker.internet().password())
+                .setConfirmPassword(faker.internet().password())
+                .clickRegisterButton()
+                .verifyRegistrationSuccessMessage()
+                .clickContinueButton()
+                .clickOnProduct("Apparel & Shoes");
     }
 
     @AfterEach
     void logoutUser() {
-        LogoutPage
+        mainPage
                 .clickLogoutButton();
     }
 }

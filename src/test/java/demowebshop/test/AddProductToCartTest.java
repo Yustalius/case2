@@ -1,27 +1,22 @@
 package demowebshop.test;
 
-import demowebshop.pages.AddToCartPage;
-import demowebshop.pages.ApparelAndShoesPage;
-import demowebshop.pages.CartPage;
-import demowebshop.pages.ProductPage;
+import demowebshop.pages.ProductCatalogPage;
 import org.junit.jupiter.api.Test;
 
 public class AddProductToCartTest extends TestBase {
 
+    private static final String POLKA_DOT_PRODUCT = "50's Rockabilly Polka Dot Top JR Plus Size";
+    protected ProductCatalogPage productCatalogPage = new ProductCatalogPage();
     @Test
     void loginAndAddProductToCart() {
-        ApparelAndShoesPage
-                .clickApparelAndShoes();
-        ProductPage
-                .clickProductName("50's Rockabilly Polka Dot Top JR Plus Size");
-        AddToCartPage
-                .verifyProductNameInUpperCase("50's Rockabilly Polka Dot Top JR Plus Size")
+        productCatalogPage
+                .clickProductName(POLKA_DOT_PRODUCT)
+                .verifyProductNameInUpperCase(POLKA_DOT_PRODUCT)
                 .clickAddToCartButton()
-                .clickToCartButton();
-        CartPage
+                .clickToCartButton()
                 .refreshCart()
                 .verifyCartQuantity("(1)")
-                .removeItemFromCart()
+                .selectItemInCart()
                 .updateCart()
                 .verifyCartQuantity("(0)");
     }

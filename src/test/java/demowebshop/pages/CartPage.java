@@ -15,7 +15,7 @@ public class CartPage {
             updateCartButton = $("[value='Update shopping cart']");
 
     @Step("Обновить страницу")
-    public static CartPage refreshCart() {
+    public CartPage refreshCart() {
         refresh();
 
         return new CartPage();
@@ -29,13 +29,13 @@ public class CartPage {
     }
 
     @Step("Выбрать товар в корзине")
-    public CartPage removeItemFromCart() {
+    public CartPage selectItemInCart() {
         removeFromCartCheckbox.click();
 
         return this;
     }
 
-    @Step("Удалить товар в корзине")
+    @Step("Нажать на кнопку обновления корзины")
     public CartPage updateCart() {
         updateCartButton.click();
 
