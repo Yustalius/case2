@@ -22,8 +22,9 @@ public class CartPage {
     }
 
     @Step("Проверить колличество в корзине {0}")
-    public CartPage verifyCartQuantity(String expectedQuantity) {
-        cartQuantity.shouldHave(text(expectedQuantity));
+    public CartPage verifyCartQuantity(int expectedQuantity) {
+        String formattedQuantity = "(" + expectedQuantity + ")";
+        cartQuantity.shouldHave(text(formattedQuantity));
 
         return this;
     }

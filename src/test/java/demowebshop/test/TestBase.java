@@ -10,8 +10,8 @@ import org.junit.jupiter.api.BeforeEach;
 
 public class TestBase {
     private static final String MAIN_PAGE_URL = "https://demowebshop.tricentis.com/";
-    protected final Faker faker = new Faker();
-    protected MainPage mainPage = new MainPage();
+    private final Faker faker = new Faker();
+     private final MainPage mainPage = new MainPage();
 
     @BeforeAll
      static void setUP() {

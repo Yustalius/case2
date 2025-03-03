@@ -1,12 +1,13 @@
 package demowebshop.test;
 
-import demowebshop.pages.ProductCatalogPage;
+import demowebshop.pages.MainPage;
 import org.junit.jupiter.api.Test;
 
 public class AddProductToCartTest extends TestBase {
 
     private static final String POLKA_DOT_PRODUCT = "50's Rockabilly Polka Dot Top JR Plus Size";
-    protected ProductCatalogPage productCatalogPage = new ProductCatalogPage();
+    private final MainPage mainPage = new MainPage();
+
     @Test
     void addProductToCartTest() {
         mainPage
@@ -16,9 +17,9 @@ public class AddProductToCartTest extends TestBase {
                 .clickAddToCartButton()
                 .clickToCartButton()
                 .refreshCart()
-                .verifyCartQuantity("(1)")
+                .verifyCartQuantity(1)
                 .selectItemInCart()
                 .updateCart()
-                .verifyCartQuantity("(0)");
+                .verifyCartQuantity(0);
     }
 }
