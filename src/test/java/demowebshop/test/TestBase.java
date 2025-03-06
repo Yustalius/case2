@@ -18,11 +18,6 @@ public class TestBase {
     private final Faker faker = new Faker();
      private final MainPage mainPage = new MainPage();
 
-    public void waitForPageToLoad() {
-        new WebDriverWait(WebDriverRunner.getWebDriver(), Duration.ofSeconds(1000)) // Используем Duration
-                .until(ExpectedConditions.jsReturnsValue("return document.readyState === 'complete';"));
-    }
-
     @BeforeAll
      static void setUP() {
         Configuration.holdBrowserOpen = true;
