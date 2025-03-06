@@ -2,16 +2,26 @@ package demowebshop.test;
 
 import com.codeborne.selenide.Configuration;
 import com.codeborne.selenide.Selenide;
+import com.codeborne.selenide.WebDriverRunner;
 import com.github.javafaker.Faker;
 import demowebshop.pages.MainPage;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
+
+import java.time.Duration;
 
 public class TestBase {
     private static final String MAIN_PAGE_URL = "https://demowebshop.tricentis.com/";
     private final Faker faker = new Faker();
      private final MainPage mainPage = new MainPage();
+
+    public void waitForPageToLoad() {
+        new WebDriverWait(WebDriverRunner.getWebDriver(), Duration.ofSeconds(1000)) // Используем Duration
+                .until(ExpectedConditions.jsReturnsValue("return document.readyState === 'complete';"));
+    }
 
     @BeforeAll
      static void setUP() {
