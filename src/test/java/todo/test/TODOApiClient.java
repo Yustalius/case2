@@ -3,6 +3,7 @@ package todo.test;
 import com.github.javafaker.Faker;
 import io.qameta.allure.Step;
 import io.restassured.builder.RequestSpecBuilder;
+import io.restassured.response.Response;
 import io.restassured.specification.RequestSpecification;
 import todo.model.AuthRequest;
 import todo.model.AuthResponse;
@@ -17,9 +18,9 @@ public class TODOApiClient {
             .setBaseUri("http://2.59.41.2:7320/")
             .setContentType(JSON)
             .build();
-    public Faker faker = new Faker();
-    String email = faker.internet().emailAddress();
-    String password = faker.internet().password();
+    private final Faker faker = new Faker();
+    private final String email = faker.internet().emailAddress();
+    private final String password = faker.internet().password();
 
     public AuthResponse register() {
         return register(email, password);
@@ -104,14 +105,13 @@ public class TODOApiClient {
     }
 
     @Step("Получение задачи")
-    public TodoResponse getTodo(int todoId) {
+public Response getTodo(int todoId) {
         return given(spec)
                 .header("Authorization", "Bearer " + login(email, password).getAccessToken())
                 .when()
                 .get("/api/todos/" + todoId)
                 .then()
-                .statusCode(200)
-                .extract().as(TodoResponse.class);
+                .extract().response();
 
     }
 }

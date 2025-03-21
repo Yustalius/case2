@@ -1,6 +1,7 @@
 package todo.test;
 
 import com.github.javafaker.Faker;
+import io.restassured.response.Response;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -91,15 +92,19 @@ public class TODOTest extends TestBase {
     void deleteTodoTest() {
         String title = faker.animal().name();
         String description = faker.hacker().abbreviation();
-        TodoResponse response = client.createTodo(
+        int todoId = client.createTodo(
                 title,
                 description,
                 "2025-03-19",
                 "21:00",
                 false
-        );
+        ).getId();
 
-        client.deleteTodo(response.getId());
+        client.deleteTodo(todoId);
+
+       Response response = client.getTodo(todoId);
+
+        assertThat(response.statusCode()).isEqualTo(404);
     }
 
     @Test
@@ -115,12 +120,12 @@ public class TODOTest extends TestBase {
                 false
         );
 
-        TodoResponse response = client.getTodo(task.getId());
-
-        assertThat(response.getTitle()).isEqualTo(title);
-        assertThat(response.getDescription()).isEqualTo(description);
-        assertThat(response.getDate()).isEqualTo("2025-03-19");
-        assertThat(response.getTime()).isEqualTo("21:00");
-        assertThat(response.isChecked()).isEqualTo(false);
+       Response response = client.getTodo(task.getId());
+        TodoResponse todoResponse = response.as(TodoResponse.class);
+        assertThat(todoResponse.getTitle()).isEqualTo(title);
+        assertThat(todoResponse.getDescription()).isEqualTo(description);
+        assertThat(todoResponse.getDate()).isEqualTo("2025-03-19");
+        assertThat(todoResponse.getTime()).isEqualTo("21:00");
+        assertThat(todoResponse.isChecked()).isEqualTo(false);
     }
 }
