@@ -12,8 +12,8 @@ import todo.model.TodoResponse;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class TODOTest extends TestBase {
-    TODOApiClient client = new TODOApiClient();
-    Faker faker = new Faker();
+    private final Faker faker = new Faker();
+    private final TODOApiClient client = new TODOApiClient();
 
     @BeforeEach
     public void setUp() {
@@ -102,7 +102,7 @@ public class TODOTest extends TestBase {
 
         client.deleteTodo(todoId);
 
-       Response response = client.getTodo(todoId);
+        Response response = client.getTodo(todoId);
 
         assertThat(response.statusCode()).isEqualTo(404);
     }
@@ -120,7 +120,7 @@ public class TODOTest extends TestBase {
                 false
         );
 
-       Response response = client.getTodo(task.getId());
+        Response response = client.getTodo(task.getId());
         TodoResponse todoResponse = response.as(TodoResponse.class);
         assertThat(todoResponse.getTitle()).isEqualTo(title);
         assertThat(todoResponse.getDescription()).isEqualTo(description);
